@@ -1,0 +1,12 @@
+pyspark>=3.4.0
+graphframes>=0.8.2
+xgboost>=1.7.0
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+networkx>=2.8.0
+plotly>=5.10.0
+pyyaml>=6.0
+jupyter>=1.0.0

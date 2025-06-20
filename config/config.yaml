@@ -1,0 +1,73 @@
+# Configuration for Knowledge Graph and XGBoost Integration
+
+# Spark Configuration
+spark:
+  app_name: "KnowledgeGraph_XGBoost"
+  master: "local[*]"
+  config:
+    spark.sql.adaptive.enabled: true
+    spark.sql.adaptive.coalescePartitions.enabled: true
+
+# Data Configuration
+data:
+  input_path: "data/input.csv"
+  output_path: "data/output/"
+  sample_size: null  # Set to integer for sampling, null for full dataset
+  
+# Graph Configuration
+graph:
+  # Relationship detection parameters
+  correlation_threshold: 0.7
+  mutual_info_threshold: 0.3
+  
+  # Graph algorithms
+  algorithms:
+    pagerank:
+      max_iter: 20
+      reset_probability: 0.15
+    connected_components: true
+    triangle_count: true
+    
+# Feature Engineering
+features:
+  # Node-level features
+  node_features:
+    - degree
+    - in_degree
+    - out_degree
+    - pagerank
+    - clustering_coefficient
+    
+  # Graph-level features
+  graph_features:
+    - connected_components
+    - triangle_count
+    - density
+    
+  # Statistical features from original data
+  statistical_features:
+    - mean
+    - std
+    - skewness
+    - kurtosis
+
+# XGBoost Configuration
+xgboost:
+  params:
+    objective: "reg:squarederror"  # Change based on your task
+    max_depth: 6
+    learning_rate: 0.1
+    n_estimators: 100
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  
+  # Cross-validation
+  cv_folds: 5
+  
+# Visualization
+visualization:
+  max_nodes: 1000  # Limit for visualization performance
+  layout: "spring"  # spring, circular, kamada_kawai
+  node_size_feature: "degree"
+  edge_weight_feature: "correlation"
